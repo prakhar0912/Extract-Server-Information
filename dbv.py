@@ -8,9 +8,13 @@ f = open("dbVersion.txt", "a")
 
 for i,user in enumerate(users):
     try: 
-        output = subprocess.check_output("pbrun -u {}adm -h {} bash -c '{}'".format(user.lower(), hostnames[i], 'sqlplus -v | grep Version'), shell=True)
+        output = subprocess.check_output("pbrun -u {}adm -h {} SHELL -c '{}'".format(user.lower(), hostnames[i], "sqlplus -v | grep -Po '(?<=Version )[^ ]+'"), shell=True)
     except:
-        output = "Error in connecting to the server\n"
+        try: 
+            output = subprocess.check_output("pbrun -u {}adm -h {} SHELL -c '{}'".format(user.lower(), hostnames[i], "hdbsql -v | grep -Po '(?<=version )[^,]+'"), shell=True)
+        except:
+            output = "Error Connecting to the Server"
+
     f.write(user+"," + hostnames[i]+"," + output)
 
 f.close()
