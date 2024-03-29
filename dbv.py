@@ -49,17 +49,17 @@ for sector in masterData:
         try:
             sqlCommand = '''pbrun -u {}adm -h {} SHELL <<"ENDPBRUN"
 sqlplus -v | grep -Po "(?<=Version )[^ ]+"
-ENDPBRUN'''.format(user.lower(), "{}".format(sector[user]))
+ENDPBRUN'''.format(user.lower(), sector["{}".format(user)])
             output = subprocess.check_output(sqlCommand, shell=True)
             output = output.split("\n")[1]
-            f.write(user + "," + "{}".format(sector[user])+"," + output + "\n")
+            f.write(user + "," + sector["{}".format(user)]+"," + output + "\n")
         except:
             try: 
                 output = subprocess.check_output("pbrun -u {}adm -h {} bash -c '{}'".format(user.lower(), europe[user], 'hdbsql -v | grep -Po "(?<=version )[^,]+"'), shell=True)
             except:
                 output = "Error Connecting to the Server\n"
             finally:
-                f.write(user + "," + "{}".format(sector[user])+"," + output)
+                f.write(user + "," + sector["{}".format(user)]+"," + output)
     
 
 f.close()
