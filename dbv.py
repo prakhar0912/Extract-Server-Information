@@ -43,21 +43,21 @@ f = open("dbVersionFinal.txt", "a")
 masterData = [europe]
 for i, sector in enumerate(masterData):
     f.write("Sector " + (i + 1) + "\n")
-    for user in enumerate(europe):
+    for user in enumerate(sector):
         try:
             sqlCommand = '''pbrun -u {}adm -h {} SHELL <<"ENDPBRUN"
 sqlplus -v | grep -Po "(?<=Version )[^ ]+"
 ENDPBRUN'''.format(user.lower(), europe[user])
             output = subprocess.check_output(sqlCommand, shell=True)
             output = output.split("\n")[1]
-            f.write(user+"," + europe[user]+"," + output + "\n")
+            f.write(user + "," + europe[user]+"," + output + "\n")
         except:
             try: 
                 output = subprocess.check_output("pbrun -u {}adm -h {} bash -c '{}'".format(user.lower(), europe[user], 'hdbsql -v | grep -Po "(?<=version )[^,]+"'), shell=True)
             except:
                 output = "Error Connecting to the Server\n"
             finally:
-                f.write(user+"," + europe[user]+"," + output)
+                f.write(user + "," + sector[user]+"," + output)
     
 
 f.close()
