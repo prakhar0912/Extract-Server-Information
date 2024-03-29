@@ -41,7 +41,7 @@ europe = {
 f = open("dbVersionFinal.txt", "a")
 
 masterData = [europe]
-for i, sector in enumerate(europe):
+for i, sector in enumerate(masterData):
     f.write("Sector " + (i + 1) + "\n")
     for user in enumerate(europe):
         try:
