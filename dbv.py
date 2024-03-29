@@ -1,6 +1,6 @@
 import subprocess
 
-europe = {
+europeData = {
 "D21":"peplap07883.pi.pvt",
 "D37":"pepldr03037.pi.pvt",
 "D57":"peplap07410.pi.pvt",
@@ -40,17 +40,19 @@ europe = {
 
 f = open("dbVersionFinal.txt", "a")
 
-masterData = [europe]
-for i, sector in enumerate(masterData):
-    f.write("Sector " + str(i + 1) + "\n")
-    for user in enumerate(sector):
+masterData = {
+    "Europe" : europeData
+}
+for sector in masterData:
+    f.write("Sector: " + sector + "\n\n")
+    for user in sector:
         try:
             sqlCommand = '''pbrun -u {}adm -h {} SHELL <<"ENDPBRUN"
 sqlplus -v | grep -Po "(?<=Version )[^ ]+"
-ENDPBRUN'''.format(user.lower(), europe[user])
+ENDPBRUN'''.format(user.lower(), sector[user])
             output = subprocess.check_output(sqlCommand, shell=True)
             output = output.split("\n")[1]
-            f.write(user + "," + europe[user]+"," + output + "\n")
+            f.write(user + "," + sector[user]+"," + output + "\n")
         except:
             try: 
                 output = subprocess.check_output("pbrun -u {}adm -h {} bash -c '{}'".format(user.lower(), europe[user], 'hdbsql -v | grep -Po "(?<=version )[^,]+"'), shell=True)
