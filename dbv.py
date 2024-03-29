@@ -42,7 +42,7 @@ f = open("dbVersionFinal.txt", "a")
 
 masterData = [europe]
 for i, sector in enumerate(masterData):
-    f.write("Sector " + (i + 1) + "\n")
+    f.write("Sector " + str(i + 1) + "\n")
     for user in enumerate(sector):
         try:
             sqlCommand = '''pbrun -u {}adm -h {} SHELL <<"ENDPBRUN"
