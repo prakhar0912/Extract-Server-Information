@@ -57,10 +57,10 @@ for sector, sectorData in masterData.items():
         'issue': 0,
         'total': 0
     }
-
+    ann = 0
     f.write("Sector: " + sector + "\n\n")
     for user,host in sectorData.items():
-        print(user, host)
+        ann = ann + 1
         try:
             sqlCommand = '''pbrun -u {}adm -h {} SHELL <<"ENDPBRUN"
 sqlplus -v | grep -Po "(?<=Version )[^ ]+"
@@ -80,6 +80,7 @@ ENDPBRUN'''.format(user.lower(), host.lower())
                 f.write(user + "," + host +"," + output)
         finally:
             stats['total'] = stats['total'] + 1
+    print(ann)
     f.write("\n\n")
     f.write("Oracle," + str(stats['oracle']) + "\n")
     f.write("Hana," + str(stats['hana']) + "\n")
