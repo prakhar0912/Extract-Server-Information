@@ -61,6 +61,7 @@ for sector, sectorData in masterData.items():
     f.write("Sector: " + sector + "\n\n")
     for user,host in sectorData.items():
         ann = ann + 1
+        print(user, host)
         try:
             sqlCommand = '''pbrun -u {}adm -h {} SHELL <<"ENDPBRUN"
 sqlplus -v | grep -Po "(?<=Version )[^ ]+"
