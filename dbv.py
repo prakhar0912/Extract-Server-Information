@@ -1,29 +1,63 @@
 import subprocess
 
-users = ["U16","U16","U32","U52","U62","U62","U62","U62","UX6","UX6","UX6","D21","D37","D57","D67","DX5","S21","S37","S57","S67","SX6","Q21","Q37","Q57","Q67","QX5","QX5","QC7","UC2","UC2","UC2","UC2","DC7","SC7"]
-hostnames = ["peplap07963.pi.pvt","peplap07968.pi.pvt","pepldr03117.pi.pvt","peplap07896.pi.pvt","peplap09459.pi.pvt","peplap09458.pi.pvt","peplap09489.pi.pvt","peplap09488.pi.pvt","peplgp01316.pi.pvt","t01lap03580.pi.pvt","peplap09587.pi.pvt","peplap07883.pi.pvt","pepldr03037.pi.pvt","peplap07410.pi.pvt","peplap09067.pi.pvt","peplgp01254.pi.pvt","peplap08701.pi.pvt","pepldr02966.pi.pvt","peplap07491.pi.pvt","peplap08704.pi.pvt","peplgp01273.pi.pvt","peplap07967.pi.pvt","pepldr03113.pi.pvt","peplap07428.pi.pvt","peplap09224.pi.pvt","peplgp01255.pi.pvt","peplap09584.pi.pvt","peplap09230.pi.pvt","peplap09172.pi.pvt","peplap09173.pi.pvt","peplap09202.pi.pvt","peplap09185.pi.pvt","peplap09066.pi.pvt","peplap08703.pi.pvt"]
-outputs = []
+europe = {
+"D21":"peplap07883.pi.pvt",
+"D37":"pepldr03037.pi.pvt",
+"D57":"peplap07410.pi.pvt",
+"D67":"peplap09067.pi.pvt",
+"DX5":"peplgp01254.pi.pvt",
+"DC7":"peplap09066.pi.pvt",
+"Q21":"peplap07967.pi.pvt",
+"Q37":"pepldr03113.pi.pvt",
+"Q57":"peplap07428.pi.pvt",
+"Q67":"peplap09224.pi.pvt",
+"QX5":"peplgp01255.pi.pvt",
+"QX5":"peplap09584.pi.pvt",
+"QC7":"peplap09230.pi.pvt",
+"S21":"peplap08701.pi.pvt",
+"S37":"pepldr02966.pi.pvt",
+"S57":"peplap07491.pi.pvt",
+"S67":"peplap08704.pi.pvt",
+"SX6":"peplgp01273.pi.pvt",
+"SC7":"PEPLAP08703.pi.pvt",
+"U16":"peplap07963.pi.pvt",
+"U16":"peplap07968.pi.pvt",
+"U32":"pepldr03117.pi.pvt",
+"U52":"peplap07896.pi.pvt",
+"U62":"peplap09459.pi.pvt",
+"U62":"peplap09458.pi.pvt",
+"U62":"peplap09489.pi.pvt",
+"U62":"peplap09488.pi.pvt",
+"UX6":"peplgp01316.pi.pvt",
+"UX6":"t01lap03580.pi.pvt",
+"UX6":"peplap09587.pi.pvt",
+"UC2":"peplap09172.pi.pvt",
+"UC2":"peplap09173.pi.pvt",
+"UC2":"peplap09202.pi.pvt",
+"UC2":"peplap09185.pi.pvt"
+}
+
 
 f = open("dbVersionFinal.txt", "a")
 
-
-
-
-for i,user in enumerate(users):
-    try:
-        sqlCommand = '''pbrun -u {}adm -h {} SHELL <<"ENDPBRUN"
+masterData = [europe]
+for i, sector in enumerate(europe):
+    f.write("Sector " + (i + 1) + "\n")
+    for user in enumerate(europe):
+        try:
+            sqlCommand = '''pbrun -u {}adm -h {} SHELL <<"ENDPBRUN"
 sqlplus -v | grep -Po "(?<=Version )[^ ]+"
-ENDPBRUN'''.format(user.lower(), hostnames[i])
-        output = subprocess.check_output(sqlCommand, shell=True)
-        output = output.split("\n")[1]
-        f.write(user+"," + hostnames[i]+"," + output + "\n")
-    except:
-        try: 
-            output = subprocess.check_output("pbrun -u {}adm -h {} bash -c '{}'".format(user.lower(), hostnames[i], 'hdbsql -v | grep -Po "(?<=version )[^,]+"'), shell=True)
+ENDPBRUN'''.format(user.lower(), europe[user])
+            output = subprocess.check_output(sqlCommand, shell=True)
+            output = output.split("\n")[1]
+            f.write(user+"," + europe[user]+"," + output + "\n")
         except:
-            output = "Error Connecting to the Server\n"
-        finally:
-            f.write(user+"," + hostnames[i]+"," + output)
+            try: 
+                output = subprocess.check_output("pbrun -u {}adm -h {} bash -c '{}'".format(user.lower(), europe[user], 'hdbsql -v | grep -Po "(?<=version )[^,]+"'), shell=True)
+            except:
+                output = "Error Connecting to the Server\n"
+            finally:
+                f.write(user+"," + europe[user]+"," + output)
     
 
 f.close()
