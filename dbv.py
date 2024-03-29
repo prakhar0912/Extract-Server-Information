@@ -15,12 +15,15 @@ for i,user in enumerate(users):
 sqlplus -v | grep -Po "(?<=Version )[^ ]+"
 ENDPBRUN'''.format(user.lower(), hostnames[i])
         output = subprocess.check_output(sqlCommand, shell=True)
+        output = output.split("\n")[1]
+        f.write(user+"," + hostnames[i]+"," + output + "\n")
     except:
         try: 
             output = subprocess.check_output("pbrun -u {}adm -h {} bash -c '{}'".format(user.lower(), hostnames[i], 'hdbsql -v | grep -Po "(?<=version )[^,]+"'), shell=True)
         except:
-            output = "Error Connecting to the Server"
-
-    f.write(user+"," + hostnames[i]+"," + output)
+            output = "Error Connecting to the Server\n"
+        finally:
+            f.write(user+"," + hostnames[i]+"," + output)
+    
 
 f.close()
