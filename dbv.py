@@ -40,10 +40,24 @@ europeData = {
 
 f = open("dbVersionFinal.txt", "a")
 
+stats = {
+    'oracle': 0,
+    'hana': 0,
+    'issue': 0,
+    'total': 0
+}
+
 masterData = {
     "Europe" : europeData
 }
 for sector, sectorData in masterData.items():
+    stats = {
+        'oracle': 0,
+        'hana': 0,
+        'issue': 0,
+        'total': 0
+    }
+
     f.write("Sector: " + sector + "\n\n")
     for user,host in sectorData.items():
         try:
@@ -53,13 +67,23 @@ ENDPBRUN'''.format(user.lower(), host.lower())
             output = subprocess.check_output(sqlCommand, shell=True)
             output = output.split("\n")[1]
             f.write(user + "," + host +"," + output + "\n")
+            stats['oracle'] = stats['oracle'] + 1
         except:
             try: 
                 output = subprocess.check_output("pbrun -u {}adm -h {} bash -c '{}'".format(user.lower(), host.lower(), 'hdbsql -v | grep -Po "(?<=version )[^,]+"'), shell=True)
+                stats['hana'] = stats['hana'] + 1
             except:
                 output = "Error Connecting to the Server\n"
+                stats['issue'] = stats['issue'] + 1
             finally:
                 f.write(user + "," + host +"," + output)
+        finally:
+            stats['total'] = stats['total'] + 1
+    f.write("Oracle," + stats['oracle'] + "\n")
+    f.write("Hana," + stats['hana'] + "\n")
+    f.write("Issue," + stats['issue'] + "\n")
+    f.write("Total," + stats['total'] + "\n")
+    f.write("\n\n")
     
 
 f.close()
