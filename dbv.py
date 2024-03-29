@@ -45,21 +45,21 @@ masterData = {
 }
 for sector in masterData:
     f.write("Sector: " + sector + "\n\n")
-    for user in sector:
+    for user,host in sector.items():
         try:
             sqlCommand = '''pbrun -u {}adm -h {} SHELL <<"ENDPBRUN"
 sqlplus -v | grep -Po "(?<=Version )[^ ]+"
-ENDPBRUN'''.format(user.lower(), sector["{}".format(user)])
+ENDPBRUN'''.format(user.lower(), host)
             output = subprocess.check_output(sqlCommand, shell=True)
             output = output.split("\n")[1]
-            f.write(user + "," + sector["{}".format(user)]+"," + output + "\n")
+            f.write(user + "," + host +"," + output + "\n")
         except:
             try: 
                 output = subprocess.check_output("pbrun -u {}adm -h {} bash -c '{}'".format(user.lower(), europe[user], 'hdbsql -v | grep -Po "(?<=version )[^,]+"'), shell=True)
             except:
                 output = "Error Connecting to the Server\n"
             finally:
-                f.write(user + "," + sector["{}".format(user)]+"," + output)
+                f.write(user + "," + host +"," + output)
     
 
 f.close()
