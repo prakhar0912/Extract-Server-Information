@@ -79,10 +79,10 @@ ENDPBRUN'''.format(user.lower(), host.lower())
                 f.write(user + "," + host +"," + output)
         finally:
             stats['total'] = stats['total'] + 1
-    f.write("Oracle," + stats['oracle'] + "\n")
-    f.write("Hana," + stats['hana'] + "\n")
-    f.write("Issue," + stats['issue'] + "\n")
-    f.write("Total," + stats['total'] + "\n")
+    f.write("Oracle," + str(stats['oracle']) + "\n")
+    f.write("Hana," + str(stats['hana']) + "\n")
+    f.write("Issue," + str(stats['issue']) + "\n")
+    f.write("Total," + str(stats['total']) + "\n")
     f.write("\n\n")
     
 
