@@ -43,9 +43,9 @@ f = open("dbVersionFinal.txt", "a")
 masterData = {
     "Europe" : europeData
 }
-for sector in masterData:
+for sector, sectorData in masterData.items():
     f.write("Sector: " + sector + "\n\n")
-    for user,host in sector.items():
+    for user,host in sectorData.items():
         try:
             sqlCommand = '''pbrun -u {}adm -h {} SHELL <<"ENDPBRUN"
 sqlplus -v | grep -Po "(?<=Version )[^ ]+"
