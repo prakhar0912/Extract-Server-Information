@@ -203,11 +203,13 @@ stats = {
 }
 
 masterData = {
-    "Europe" : europe,
-    "PGCS": pgcs,
+    # "Europe" : europe,
+    # "PGCS": pgcs,
     "Global": glob,
-    "LATAM": latam
+    # "LATAM": latam
 }
+
+output = ''
 for sector, sectorData in masterData.items():
     stats = {
         'oracle': 0,
@@ -219,7 +221,6 @@ for sector, sectorData in masterData.items():
     f.write("Sector: " + sector + "\n\n")
     for user,host in sectorData.items():
         ann = ann + 1
-        print(user, host)
         try:
             sqlCommand = '''pbrun -u {}adm -h {} SHELL <<"ENDPBRUN"
 sqlplus -v | grep -Po "(?<=Version )[^ ]+"
@@ -238,6 +239,7 @@ ENDPBRUN'''.format(user.lower(), host.lower())
             finally:
                 f.write(user + "," + host +"," + output)
         finally:
+            print(output)
             stats['total'] = stats['total'] + 1
     print(ann)
     f.write("\n\n")
