@@ -234,12 +234,10 @@ ENDPBRUN'''.format(user.lower(), host.lower())
                 output = subprocess.check_output("pbrun -u {}adm -h {} bash -c '{}'".format(user.lower(), host.lower(), 'hdbsql -v | grep -Po "(?<=version )[^,]+"'), shell=True)
                 stats['hana'] = stats['hana'] + 1
             except:
-                output = "Error Connecting to the Server\n"
                 stats['issue'] = stats['issue'] + 1
             finally:
                 f.write(user + "," + host +"," + output)
         finally:
-            print(output)
             stats['total'] = stats['total'] + 1
     print(ann)
     f.write("\n\n")
