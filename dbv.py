@@ -193,15 +193,22 @@ glob = {
 }
 
 
+
 f = open("dbVersionFinal.txt", "a")
 
 stats = {"oracle": 0, "hana": 0, "issue": 0, "total": 0}
+
+sqlCommandsMaster = {
+    "OS": 'bash -c . /etc/os-release; echo "$PRETTY_NAME"'
+}
+
 
 masterData = {
     "Europe": europe,
     "PGCS": pgcs,
     "Global": glob,
-    "LATAM": latam
+    "LATAM": latam,
+    # "Trial": trial
 }
 
 output = ""
@@ -209,12 +216,12 @@ for sector, sectorData in masterData.items():
     stats = {"oracle": 0, "hana": 0, "issue": 0, "total": 0}
     ann = 0
     f.write("Sector: " + sector + "\n\n")
-    for user, host in sectorData.items():
+    for host, user in sectorData.items():
         ann = ann + 1
         try:
-            sqlCommand = """pbrun -u {}adm -h {} SHELL <<"ENDPBRUN"
-sqlplus -v | grep -Po "(?<=Version )[^ ]+"
-ENDPBRUN""".format(
+            sqlCommand = """pbrun -u {}adm -h {} /bin/sh <<"ENDPBRUN"
+            sqlplus -v | grep -Po "(?<=Version )[^ ]+"
+            ENDPBRUN""".format(
                 user.lower(), host.lower()
             )
             output = subprocess.check_output(sqlCommand, shell=True)

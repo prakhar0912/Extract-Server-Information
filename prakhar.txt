@@ -1,0 +1,241 @@
+peplap08641:u17adm 128> sappfpar check pf=U17_ASCS16_sapu17
+
+
+================================================================================
+==   Checking profile:     /sapmnt/U17/profile/U17_ASCS16_sapu17
+================================================================================
+
+
+
+***WARNING: Unexpected parameter: DIR_TRFILES =/usr/sap/ecctrans/D22
+***WARNING: Unexpected parameter: DIR_TRSUB =/usr/sap/ecctrans/D22
+***WARNING: Unexpected parameter: Restart_Program_00 =local ms.sapU17_ASCS16 pf=/usr/sap/U17/SYS/profile/U17_ASCS16_sapu17
+***WARNING: Unexpected parameter: Restart_Program_01 =local en.sapU17_ASCS16 pf=/usr/sap/U17/SYS/profile/U17_ASCS16_sapu17
+***WARNING: Unexpected parameter: SAPFQDN =cww.pep.pvt
+***WARNING: Unexpected parameter: SETENV_00 =DIR_LIBRARY=/usr/sap/U17/ASCS16/exe
+***WARNING: Unexpected parameter: SETENV_01 =LD_LIBRARY_PATH=/usr/sap/U17/ASCS16/exe:/usr/sap/U17/SYS/exe/run:/usr/sap/U17/SYS/exe/uc/linuxx86_64:/oracle/client/19/instantclient
+***WARNING: Unexpected parameter: SETENV_02 =SHLIB_PATH=/usr/sap/U17/ASCS16/exe:
+***WARNING: Unexpected parameter: SETENV_03 =LIBPATH=/usr/sap/U17/ASCS16/exe:
+***WARNING: Unexpected parameter: SETENV_04 =PATH=/usr/sap/U17/ASCS16/exe:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/usr/sap/U17/SYS/exe/uc/linuxx86_64:/usr/sap/U17/SYS/exe/run:/home/u17adm
+***WARNING: Unexpected parameter: SETENV_05 =SECUDIR=/usr/sap/U17/ASCS16/sec
+***WARNING: Unexpected parameter: abap/arfcrstate_col_delete =X
+***WARNING: Unexpected parameter: auth/auth_number_in_userbuffer =5000
+***WARNING: Unexpected parameter: enque/snapshot_pck_ids =1600
+***WARNING: Unexpected parameter: ms/standalone =1
+***WARNING: Unexpected parameter: rspo/host_spool/burst_pages =0
+***WARNING: Unexpected parameter: service/protectedwebmethods =SDEFAULT
+
+Maximum shared memory size > 20G
+***ERROR: Size of shared memory pool 40 too small
+================================================================
+SOLUTIONS: (1) Locate shared memory segments outside of pool 40
+               with parameters like: ipc/shm_psize_<key> =0
+
+SOLUTION: Increase size of shared memory pool 40
+          with parameter: ipc/shm_psize_40 =486000000
+
+Shared memory disposition overview
+================================================================
+Shared memory pools
+ Key:   10  Pool
+            Size configured.....:   200000000 ( 190.7 MB)
+            Size min. estimated.:   132565864 ( 126.4 MB)
+            Advised Size........:   136000000 ( 129.7 MB)
+
+ Key:   40  Pool for database buffers
+            Size configured.....:   110000000 ( 104.9 MB)
+            Size min. estimated.:   482199040 ( 459.9 MB)
+            Advised Size........:   486000000 ( 463.5 MB)
+
+Shared memories inside of pool 10
+ Key:       11  Size:      500000 (   0.5 MB) Factory calender buffer
+ Key:       12  Size:     6000000 (   5.7 MB) TemSe Char-Code convert Buf.
+ Key:       13  Size:    60500000 (  57.7 MB) Alert Area
+ Key:       14  Size:     4400000 (   4.2 MB) Presentation buffer
+ Key:       16  Size:       22400 (   0.0 MB) Semaphore activity monitoring
+ Key:       17  Size:    11142696 (  10.6 MB) Roll administration
+
+Shared memories inside of pool 40
+ Key:       42  Size:    70592992 (  67.3 MB) DB TTAB buffer
+ Key:       43  Size:   273654392 ( 261.0 MB) DB FTAB buffer
+ Key:       44  Size:    48374392 (  46.1 MB) DB IREC buffer
+ Key:       45  Size:    33014392 (  31.5 MB) DB short nametab buffer
+ Key:       46  Size:       20480 (   0.0 MB) DB sync table
+ Key:       47  Size:     3073024 (   2.9 MB) DB CUA buffer
+ Key:       48  Size:      500000 (   0.5 MB) Number range buffer
+ Key:       49  Size:     2968344 (   2.8 MB) Spool admin (SpoolWP+DiaWP)
+
+Shared memories outside of pools
+ Key:        1  Size:        2500 (   0.0 MB) System administration
+ Key:        2  Size:     6220836 (   5.9 MB) Disp. administration tables
+ Key:        3  Size:    66864000 (  63.8 MB) Disp. communication areas
+ Key:        4  Size:      504448 (   0.5 MB) statistic area
+ Key:        6  Size:   319488000 ( 304.7 MB) ABAP program buffer
+ Key:        7  Size:       14838 (   0.0 MB) Update task administration
+ Key:        8  Size:   268435556 ( 256.0 MB) Paging buffer
+ Key:        9  Size:   268435556 ( 256.0 MB) Roll buffer
+ Key:       18  Size:     3670116 (   3.5 MB) Paging adminitration
+ Key:       19  Size:    30000000 (  28.6 MB) Table-buffer
+ Key:       30  Size:        5120 (   0.0 MB) Taskhandler runtime admin.
+ Key:       31  Size:     3612000 (   3.4 MB) Dispatcher request queue
+ Key:       33  Size:    10240000 (   9.8 MB) Table buffer, part.buffering
+ Key:       34  Size:    65536000 (  62.5 MB) Enqueue table
+ Key:       41  Size:    25010000 (  23.9 MB) DB statistics buffer
+ Key:       51  Size:    18000000 (  17.2 MB) Extended memory admin.
+ Key:       52  Size:      180000 (   0.2 MB) Message Server buffer
+ Key:       54  Size:     8396800 (   8.0 MB) Export/Import buffer
+ Key:       55  Size:        8192 (   0.0 MB) Spool local printer+joblist
+ Key:       57  Size:     1572864 (   1.5 MB) Profilparameter in shared mem
+ Key:       58  Size:        4096 (   0.0 MB) Enqueue ID for reset
+ Key:       62  Size:    85983232 (  82.0 MB) Memory pipes
+ Key:       63  Size:      409600 (   0.4 MB) ICMAN shared memory
+ Key:       64  Size:     4202496 (   4.0 MB) Online Text Repository Buf.
+ Key:       65  Size:     4202496 (   4.0 MB) Export/Import Shared Memory
+ Key:       81  Size:       21760 (   0.0 MB) Security Audit Log
+ Key:     1002  Size:      400000 (   0.4 MB) Performance monitoring V01.0
+ Key: 58900116  Size:        4096 (   0.0 MB) SCSA area
+
+Nr of operating system shared memory segments: 30
+
+Shared memory resource requirements estimated
+================================================================
+Total Nr of shared segments required.....:         30
+System-imposed number of shared memories.:       1000
+Shared memory segment size required min..:  486000000 ( 463.5 MB)
+Currently available maximum segment size.: 34359738368 (32768.0 MB)
+
+Swap space requirements estimated
+================================================
+Shared memory....................: 1729.4 MB
+..in pool 10  126.4 MB,   66% used
+..in pool 40  104.9 MB,  438% used !!
+..not in pool: 1136.2 MB
+Processes........................:   61.8 MB
+Extended Memory .................: 4096.0 MB
+------------------------------------------------
+Total, minimum requirement.......: 5887.2 MB
+Process local heaps, worst case..: 1907.3 MB
+Total, worst case requirement....: 7794.6 MB
+
+Errors detected..................:    1
+Warnings detected................:   17
+peplap08641:u17adm 129>
+
+
+
+
+
+peplap08641:u17adm 130> sappfpar check pf=U17_DVEBMGS17_sapu17
+
+
+================================================================================
+==   Checking profile:     /sapmnt/U17/profile/U17_DVEBMGS17_sapu17
+================================================================================
+
+
+
+***WARNING: Unexpected parameter: DIR_TRFILES =/usr/sap/ecctrans/D22
+***WARNING: Unexpected parameter: DIR_TRSUB =/usr/sap/ecctrans/D22
+***WARNING: Unexpected parameter: SAPFQDN =cww.pep.pvt
+***WARNING: Unexpected parameter: SETENV_00 =DIR_LIBRARY=/usr/sap/U17/DVEBMGS17/exe
+***WARNING: Unexpected parameter: SETENV_01 =LD_LIBRARY_PATH=/usr/sap/U17/DVEBMGS17/exe:/usr/sap/U17/SYS/exe/run:/usr/sap/U17/SYS/exe/uc/linuxx86_64:/oracle/client/19/instantclient
+***WARNING: Unexpected parameter: SETENV_02 =SHLIB_PATH=/usr/sap/U17/DVEBMGS17/exe:
+***WARNING: Unexpected parameter: SETENV_03 =LIBPATH=/usr/sap/U17/DVEBMGS17/exe:
+***WARNING: Unexpected parameter: SETENV_04 =PATH=/usr/sap/U17/DVEBMGS17/exe:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/usr/sap/U17/SYS/exe/uc/linuxx86_64:/usr/sap/U17/SYS/exe/run:/home/u17adm
+***WARNING: Unexpected parameter: SETENV_05 =SECUDIR=/usr/sap/U17/DVEBMGS17/sec
+***WARNING: Unexpected parameter: abap/arfcrstate_col_delete =X
+***WARNING: Unexpected parameter: auth/auth_number_in_userbuffer =5000
+***WARNING: Unexpected parameter: icm/HTTP/file_access_1 =PREFIX=/clientaccesspolicy.xml,DOCROOT=/usr/sap/U17/DVEBMGS17/data/icmandir/admin/clientaccesspolicy.xml,CACHECTRL=0
+***WARNING: Unexpected parameter: icm/HTTP/file_access_2 =PREFIX=/crossdomain.xml,DOCROOT=/usr/sap/U17/DVEBMGS17/data/icmandir/admin/crossdomain.xml,CACHECTRL=0
+***WARNING: Unexpected parameter: rdisp/force_sched_after_commit =NO
+***WARNING: Unexpected parameter: rsdb/esm/max_object =10000
+***WARNING: Unexpected parameter: rspo/host_spool/burst_pages =0
+***WARNING: Unexpected parameter: service/protectedwebmethods =SDEFAULT
+
+Maximum shared memory size > 20G
+Shared memory disposition overview
+================================================================
+Shared memory pools
+ Key:   10  Pool
+            Size configured.....:   202000000 ( 192.6 MB)
+            Size min. estimated.:   199715524 ( 190.5 MB)
+            Advised Size........:   202000000 ( 192.6 MB)
+
+ Key:   40  Pool for database buffers
+            Size configured.....:   718000000 ( 684.7 MB)
+            Size min. estimated.:   714664160 ( 681.6 MB)
+            Advised Size........:   718000000 ( 684.7 MB)
+
+Shared memories inside of pool 10
+ Key:       11  Size:      500000 (   0.5 MB) Factory calender buffer
+ Key:       12  Size:     6000000 (   5.7 MB) TemSe Char-Code convert Buf.
+ Key:       13  Size:    60500000 (  57.7 MB) Alert Area
+ Key:       14  Size:    61440000 (  58.6 MB) Presentation buffer
+ Key:       16  Size:       22400 (   0.0 MB) Semaphore activity monitoring
+ Key:       17  Size:    21252356 (  20.3 MB) Roll administration
+
+Shared memories inside of pool 40
+ Key:       42  Size:   140816992 ( 134.3 MB) DB TTAB buffer
+ Key:       43  Size:   342415512 ( 326.6 MB) DB FTAB buffer
+ Key:       44  Size:    55690392 (  53.1 MB) DB IREC buffer
+ Key:       45  Size:    65930392 (  62.9 MB) DB short nametab buffer
+ Key:       46  Size:       20480 (   0.0 MB) DB sync table
+ Key:       47  Size:    56321024 (  53.7 MB) DB CUA buffer
+ Key:       48  Size:      500000 (   0.5 MB) Number range buffer
+ Key:       49  Size:     2968344 (   2.8 MB) Spool admin (SpoolWP+DiaWP)
+
+Shared memories outside of pools
+ Key:        1  Size:        2500 (   0.0 MB) System administration
+ Key:        2  Size:   148464636 ( 141.6 MB) Disp. administration tables
+ Key:        3  Size:   267456000 ( 255.1 MB) Disp. communication areas
+ Key:        4  Size:      517048 (   0.5 MB) statistic area
+ Key:        6  Size:  1064960000 (1015.6 MB) ABAP program buffer
+ Key:        7  Size:       14838 (   0.0 MB) Update task administration
+ Key:        8  Size:   268435556 ( 256.0 MB) Paging buffer
+ Key:        9  Size:   402653284 ( 384.0 MB) Roll buffer
+ Key:       18  Size:     7000100 (   6.7 MB) Paging adminitration
+ Key:       19  Size:   180000768 ( 171.7 MB) Table-buffer
+ Key:       30  Size:       26624 (   0.0 MB) Taskhandler runtime admin.
+ Key:       31  Size:     8412000 (   8.0 MB) Dispatcher request queue
+ Key:       33  Size:    81920000 (  78.1 MB) Table buffer, part.buffering
+ Key:       34  Size:    33554432 (  32.0 MB) Enqueue table
+ Key:       41  Size:    25010000 (  23.9 MB) DB statistics buffer
+ Key:       51  Size:    18000000 (  17.2 MB) Extended memory admin.
+ Key:       52  Size:      180000 (   0.2 MB) Message Server buffer
+ Key:       54  Size:   158728192 ( 151.4 MB) Export/Import buffer
+ Key:       55  Size:        8192 (   0.0 MB) Spool local printer+joblist
+ Key:       57  Size:     1572864 (   1.5 MB) Profilparameter in shared mem
+ Key:       58  Size:        4096 (   0.0 MB) Enqueue ID for reset
+ Key:       62  Size:   526385152 ( 502.0 MB) Memory pipes
+ Key:       63  Size:      409600 (   0.4 MB) ICMAN shared memory
+ Key:       64  Size:     4202496 (   4.0 MB) Online Text Repository Buf.
+ Key:       65  Size:    40968192 (  39.1 MB) Export/Import Shared Memory
+ Key:       81  Size:       21760 (   0.0 MB) Security Audit Log
+ Key:     1002  Size:      400000 (   0.4 MB) Performance monitoring V01.0
+ Key: 58900117  Size:        4096 (   0.0 MB) SCSA area
+
+Nr of operating system shared memory segments: 30
+
+Shared memory resource requirements estimated
+================================================================
+Total Nr of shared segments required.....:         30
+System-imposed number of shared memories.:       1000
+Shared memory segment size required min..: 1064960000 (1015.6 MB)
+Currently available maximum segment size.: 34359738368 (32768.0 MB)
+
+Swap space requirements estimated
+================================================
+Shared memory....................: 3966.6 MB
+..in pool 10  190.5 MB,   98% used
+..in pool 40  681.6 MB,   99% used
+..not in pool: 3089.2 MB
+Processes........................:  355.2 MB
+Extended Memory .................: 6144.0 MB
+------------------------------------------------
+Total, minimum requirement.......: 10465.9 MB
+Process local heaps, worst case..: 3338.0 MB
+Total, worst case requirement....: 13803.9 MB
+
+Errors detected..................:    0
+Warnings detected................:   17
+peplap08641:u17adm 131>
